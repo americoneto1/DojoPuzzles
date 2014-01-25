@@ -1,38 +1,35 @@
 package br.com.edsonmartins.maven;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
+{    
+    @Test
+	public void deveQuebrarTresLinhas()
     {
-        super( testName );
+    	// Original: 
+    	// - Um pequeno jabuti xereta viu dez cegonhas felizes.    	
+    	// Quebrado:
+    	// - Um pequeno jabuti
+    	// - xereta viu dez
+    	// - cegonhas felizes.    	
+    	QuebraDeLinha q = new QuebraDeLinha("Um pequeno jabuti xereta viu dez cegonhas felizes.", 20);
+    	Assert.assertEquals("Um pequeno jabuti \nxereta viu dez \ncegonhas felizes.", q.quebrarLinha());
     }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    
+    @Test 
+    public void deveQuebrarDuasLinhas() {    	
+    	QuebraDeLinha q = new QuebraDeLinha("Frase teste", 10);
+    	Assert.assertEquals("Frase \nteste", q.quebrarLinha()); 
     }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    
+    @Test 
+    public void naoDeveQuebrarLinha() {    	
+    	QuebraDeLinha q = new QuebraDeLinha("Frase test", 10);
+    	Assert.assertEquals("Frase test", q.quebrarLinha()); 
     }
 }
