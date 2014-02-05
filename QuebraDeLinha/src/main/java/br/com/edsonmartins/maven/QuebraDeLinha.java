@@ -2,6 +2,7 @@ package br.com.edsonmartins.maven;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 
 public class QuebraDeLinha {
 	
@@ -35,17 +36,6 @@ public class QuebraDeLinha {
 				colunasRestantesNaLinha -= 1;
 			}			
 		}
-		return montarLinhas(linhas);
-	}
-	
-	private String montarLinhas(List<String> linhas) {
-		String novaFrase = "";
-		for(int j = 0, len = linhas.size(); j < len; j += 1) {
-			novaFrase += linhas.get(j);
-			if( j != len - 1 ) {
-				novaFrase += "\n";
-			}
-		}
-		return novaFrase;
+		return StringUtils.join(linhas.toArray(), "\n");
 	}
 }
